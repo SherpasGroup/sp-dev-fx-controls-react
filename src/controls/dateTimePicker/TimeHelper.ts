@@ -21,9 +21,9 @@ export class TimeHelper {
   }
 
   /**
-   * Suffix number with zero
+   * Prefix number with zero
    */
-  public static suffixZero(value: string, size: number = 2) {
+  public static prefixZero(value: string, size: number = 2) {
     while (value.length < size) {
       value = `0${value}`;
     }
@@ -39,18 +39,18 @@ export class TimeHelper {
   public static hoursValue(hours: number, timeConvention: TimeConvention): string {
     if (timeConvention === TimeConvention.Hours24) {
       // 24 hours time convention
-      return this.suffixZero(hours.toString());
+      return this.prefixZero(hours.toString());
     } else {
       // 12 hours time convention
       if (hours === 0) {
         return `12 AM`;
       } else if (hours < 12) {
-        return `${this.suffixZero(hours.toString())} AM`;
+        return `${this.prefixZero(hours.toString())} AM`;
       } else {
         if (hours === 12) {
           return `12 PM`;
         } else {
-          return `${this.suffixZero((hours % 12).toString())} PM`;
+          return `${this.prefixZero((hours % 12).toString())} PM`;
         }
       }
     }

@@ -1,4 +1,5 @@
 import { DayOfWeek } from 'office-ui-fabric-react/lib/utilities/dateValues/DateValues';
+import { ControlType } from './ControlType';
 import { TimeConvention, DateConvention } from './DateTimeConventions';
 import { IDateTimePickerStrings } from './IDateTimePickerStrings';
 
@@ -91,4 +92,9 @@ export interface IDateTimePickerProps {
    * Specifies, if seconds dropdown should be shown, defaults to false.
    */
   showSeconds?: boolean;
+  /**
+   * Specifies the type of control to use for the time picker part.
+   * Options are 'text' (default) or 'dropdown'
+   */
+  timeControlType?: ControlType;
 }

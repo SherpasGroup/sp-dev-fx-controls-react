@@ -8,8 +8,11 @@ import * as strings from "ControlStrings";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import styles from "./DateTimePicker.module.scss";
 import HoursComponent from "./HoursComponent";
+import HoursDropdownComponent from "./HoursDropdownComponent";
 import MinutesComponent from "./MinutesComponent";
+import MinutesDropdownComponent from "./MinutesDropdownComponent";
 import SecondsComponent from "./SecondsComponent";
+import SecondsDropdownComponent from "./SecondsDropdownComponent";
 import * as telemetry from "../../common/telemetry";
 import { Async, css } from 'office-ui-fabric-react/lib/Utilities';
 import { IDateTimePickerProps, IDateTimePickerState, DateTimePickerStrings } from ".";
@@ -110,76 +113,59 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
     this.setState({ day }, () => this.delayedValidate(this.state.day));
   }
 
-
-
   /**
-   * Function called when hours value have been changed
-   * @param element Hours dropdown value
+   * Function called when time values have been changed
+   * @param prop Name of state property to update
+   * @param value New value for state property
    */
-  private dropdownHoursChanged = (value?: string): void => {
+  private handleTimeChanged = (prop: keyof IDateTimePickerState, value: number): void => {
     this.setState(({ day }) => {
-      const hoursSplit = value.split(" ");
-      const hoursValue = hoursSplit[0].length > 2 ? hoursSplit[0].substring(0, 2) : hoursSplit[0];
-      let hours: number = parseInt(hoursValue);
-      if (isNaN(hours)) {
-        return;
-      }
-
-      if (this.props.timeConvention !== TimeConvention.Hours24) {
-        if (hoursSplit[1] && hoursSplit[1].toLowerCase().indexOf("pm") !== -1) {
-          hours += 12;
-          if (hours === 24) {
-            hours = 0;
-          }
+      const state: Partial<IDateTimePickerState> = { [prop]: value };
+      const date: Date = TimeHelper.cloneDate(day);
+      if (date) {
+        switch (prop) {
+          case 'hours':
+            date.setHours(value);
+            state.day = date;
+            break;
+          case 'minutes':
+            date.setMinutes(value);
+            state.day = date;
+            break;
+          case 'seconds':
+            date.setSeconds(value);
+            state.day = date;
+            break;
+          default:
+            break;
         }
       }
-
-      if (hours > 23) {
-        return;
-      }
-
-      const state: Partial<IDateTimePickerState> = { hours };
-      const date: Date = TimeHelper.cloneDate(day);
-      if (date) {
-        date.setHours(hours);
-        state.day = date;
-      }
       return state;
     }, () => this.delayedValidate(this.state.day));
   }
 
   /**
-   * Function called when minutes value have been changed
-   * @param element Minutes dropdown value
+   * Function called when hours value has been changed
+   * @param hours Hours value
    */
-  private dropdownMinutesChanged = (value?: string): void => {
-    this.setState(({ day }) => {
-      const minutes: number = parseInt(value.length > 2 ? value.substring(0, 2) : value);
-      const state: Partial<IDateTimePickerState> = { minutes };
-      const date: Date = TimeHelper.cloneDate(day);
-      if (date) {
-        date.setMinutes(minutes);
-        state.day = date;
-      }
-      return state;
-    }, () => this.delayedValidate(this.state.day));
+  private handleHoursChanged = (hours: number): void => {
+    this.handleTimeChanged('hours', hours);
   }
 
   /**
-   * Function called when seconds value have been changed
-   * @param element Seconds dropdown value
+   * Function called when minutes value has been changed
+   * @param minutes Minutes value
    */
-  private dropdownSecondsChanged = (value?: string): void => {
-    this.setState(({ day }) => {
-      const seconds: number = parseInt(value.length > 2 ? value.substring(0, 2) : value);
-      const state: Partial<IDateTimePickerState> = { seconds };
-      const date: Date = TimeHelper.cloneDate(day);
-      if (date) {
-        date.setSeconds(seconds);
-        state.day = date;
-      }
-      return state;
-    }, () => this.delayedValidate(this.state.day));
+  private handleMinutesChanged = (minutes: number): void => {
+    this.handleTimeChanged('minutes', minutes);
+  }
+
+  /**
+   * Function called when seconds value has been changed
+   * @param seconds Seconds value
+   */
+  private handleSecondsChanged = (seconds: number): void => {
+    this.handleTimeChanged('seconds', seconds);
   }
 
   /**
@@ -191,6 +177,7 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
     const {
       label,
       disabled,
+      timeControlType = 'text',
       timeConvention,
       dateConvention = DateConvention.DateTime,
       firstDayOfWeek,
@@ -218,10 +205,20 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
 
           <div className={styles.time}>
             <div className={styles.picker}>
-              <HoursComponent disabled={disabled}
-                timeConvention={timeConvention}
-                value={hours}
-                onChange={this.dropdownHoursChanged} />
+              {(timeControlType === 'dropdown' ?
+                <HoursDropdownComponent
+                  disabled={disabled}
+                  timeConvention={timeConvention}
+                  value={hours}
+                  onChange={this.handleHoursChanged}
+                />
+                :
+                <HoursComponent
+                  disabled={disabled}
+                  timeConvention={timeConvention}
+                  value={hours}
+                  onChange={this.handleHoursChanged} />
+              )}
             </div>
 
             <div className={styles.separator}>
@@ -229,9 +226,18 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
             </div>
 
             <div className={styles.picker}>
-              <MinutesComponent disabled={disabled}
-                value={minutes}
-                onChange={this.dropdownMinutesChanged} />
+              {(timeControlType === 'dropdown' ?
+                <MinutesDropdownComponent
+                  disabled={disabled}
+                  value={minutes}
+                  onChange={this.handleMinutesChanged}
+                />
+                :
+                <MinutesComponent
+                  disabled={disabled}
+                  value={minutes}
+                  onChange={this.handleMinutesChanged} />
+              )}
             </div>
 
             {
@@ -245,9 +251,18 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
             {
               showSeconds && (
                 <div className={styles.picker}>
-                  <SecondsComponent disabled={disabled}
-                    value={seconds}
-                    onChange={this.dropdownSecondsChanged} />
+                  {(timeControlType === 'dropdown' ?
+                    <SecondsDropdownComponent
+                      disabled={disabled}
+                      value={seconds}
+                      onChange={this.handleSecondsChanged}
+                    />
+                    :
+                    <SecondsComponent
+                      disabled={disabled}
+                      value={seconds}
+                      onChange={this.handleSecondsChanged} />
+                  )}
                 </div>
               )
             }

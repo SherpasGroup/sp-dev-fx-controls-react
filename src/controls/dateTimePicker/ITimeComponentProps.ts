@@ -7,7 +7,7 @@ import { TimeConvention } from './DateTimeConventions';
 export interface ITimeComponentProps {
   disabled?: boolean;
   value: number;
-  onChange: (value?: string) => void;
+  onChange: (value: number) => void;
 }
 
 /**
