@@ -201,7 +201,7 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
     if (dateConvention === DateConvention.DateTime) {
       timeElm = (
         <div className={css(styles.row, styles.timeRow)}>
-          <div className={styles.labelCell}><Label className={styles.fieldLabel}>{strings.DateTimePickerTime}</Label></div>
+          <div className={styles.labelCell}><Label className={styles.fieldLabel}>{dateStrings.timeLabel}</Label></div>
 
           <div className={styles.time}>
             <div className={styles.picker}>
@@ -280,7 +280,7 @@ export class DateTimePicker extends React.Component<IDateTimePickerProps, IDateT
         <div className={styles.container}>
           <div className={styles.row}>
             <div className={styles.labelCell}>
-              <Label className={styles.fieldLabel}>{strings.DateTimePickerDate}</Label>
+              <Label className={styles.fieldLabel}>{dateStrings.dateLabel}</Label>
             </div>
 
             <div className={styles.picker}>
