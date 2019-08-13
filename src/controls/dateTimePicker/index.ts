@@ -1,3 +1,4 @@
+export * from './ControlType';
 export * from './DateTimeConventions';
 export * from './IDateTimePickerProps';
 export * from './IDateTimePickerState';
