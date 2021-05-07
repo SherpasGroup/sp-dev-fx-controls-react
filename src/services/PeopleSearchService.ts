@@ -208,9 +208,6 @@ export default class SPPeopleSearchService {
             values = JSON.parse(userDataResp.value);
           }
 
-          // Filter out "UNVALIDATED_EMAIL_ADDRESS"
-          values = values.filter(v => !(v.EntityData && v.EntityData.PrincipalType && v.EntityData.PrincipalType === "UNVALIDATED_EMAIL_ADDRESS"));
-
           // Check if local user IDs need to be retrieved
           if (ensureUser) {
             for (const value of values) {
