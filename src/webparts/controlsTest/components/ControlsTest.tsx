@@ -172,8 +172,8 @@ import {
 import { MyTeams } from "../../../controls/MyTeams";
 import { TeamPicker } from "../../../TeamPicker";
 import { TeamChannelPicker } from "../../../TeamChannelPicker";
-import {​​ DragDropFiles }​​ from "../../../DragDropFiles";
-import {​​ SitePicker }​​ from "../../../controls/sitePicker/SitePicker";
+import { DragDropFiles } from "../../../DragDropFiles";
+import { SitePicker } from "../../../controls/sitePicker/SitePicker";
 import { DynamicForm } from '../../../controls/dynamicForm';
 
 
@@ -852,7 +852,7 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
             <Link href="https://pnp.github.io/sp-dev-fx-controls-react/">See all</Link>
           } />
 
-<Stack styles={{ root: { marginBottom: 200 } }}>
+        <Stack styles={{ root: { marginBottom: 200 } }}>
           <MyTeams
             title="My Teams"
             webPartContext={this.props.context}
@@ -877,7 +877,7 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
               console.log(tagList);
             }}
           />
-          {this.state?.selectedTeam && this.state?.selectedTeam.length > 0 && (
+          {this.state ?.selectedTeam && this.state ?.selectedTeam.length > 0 && (
             <>
               <TeamChannelPicker
                 label="Select Team Channel"
@@ -1092,6 +1092,17 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
               termActionsDisplayStyle: TermActionsDisplayStyle.textAndIcon
             }} />
 
+          <TaxonomyPicker
+            allowMultipleSelections={false}
+            termsetNameOrID="2295cfe7-ae45-48a4-885f-045593aaa14f"
+            panelTitle=""
+            label="test test test"
+            context={this.props.context}
+            isTermSetSelectable={false}
+            // ref={ref=>elementsRef.current.push(ref)}
+            initialValues={[]}
+          />
+
           <DefaultButton text="Add" onClick={() => {
             this.setState({
               initialValues: [{
@@ -1272,12 +1283,12 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
           iconName="Upload"
           labelMessage="My custom upload File"
         >
-        <Placeholder iconName='BulkUpload'
-          iconText='Drag files or folder with files here...'
-          description={defaultClassNames => <span className={defaultClassNames}>Drag files or folder with files here...</span>}
-          buttonLabel='Configure'
-          hideButton={this.props.displayMode === DisplayMode.Read}
-          onConfigure={this._onConfigure} />
+          <Placeholder iconName='BulkUpload'
+            iconText='Drag files or folder with files here...'
+            description={defaultClassNames => <span className={defaultClassNames}>Drag files or folder with files here...</span>}
+            buttonLabel='Configure'
+            hideButton={this.props.displayMode === DisplayMode.Read}
+            onConfigure={this._onConfigure} />
         </DragDropFiles>
         <br></br>
 
@@ -1385,14 +1396,14 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
 
               <div className="ms-font-m">Site picker tester:
               <SitePicker
-                context={this.props.context}
-                label={'select sites'}
-                mode={'site'}
-                allowSearch={true}
-                multiSelect={false}
-                onChange={(sites) => { console.log(sites); }}
-                placeholder={'Select sites'}
-                searchPlaceholder={'Filter sites'} />
+                  context={this.props.context}
+                  label={'select sites'}
+                  mode={'site'}
+                  allowSearch={true}
+                  multiSelect={false}
+                  onChange={(sites) => { console.log(sites); }}
+                  placeholder={'Select sites'}
+                  searchPlaceholder={'Filter sites'} />
               </div>
 
               <div className="ms-font-m">List picker tester:

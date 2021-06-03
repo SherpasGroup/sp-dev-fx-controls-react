@@ -11,6 +11,7 @@ import { SPHttpClient } from '@microsoft/sp-http';
 import { SiteBreadcrumb } from '../../../SiteBreadcrumb';
 import { WebPartTitle } from '../../../WebPartTitle';
 import { TaxonomyPicker, IPickerTerms, UpdateType } from '../../../TaxonomyPicker';
+import { ModernTaxonomyPicker } from '../../../ModernTaxonomyPicker';
 import { ListPicker } from '../../../ListPicker';
 import { IFrameDialog } from '../../../IFrameDialog';
 import { IFramePanel } from '../../../IFramePanel';
@@ -37,7 +38,7 @@ import { Carousel, CarouselButtonsLocation, CarouselButtonsDisplay } from '../..
 import { TimeDisplayControlType } from '../../../controls/dateTimePicker/TimeDisplayControlType';
 import { GridLayout } from '../../../GridLayout';
 import { ComboBoxListItemPicker, DynamicForm } from '../../..';
-import { IconPicker} from '../../../controls/iconPicker';
+import { IconPicker } from '../../../controls/iconPicker';
 
 import { ISize } from 'office-ui-fabric-react/lib/Utilities';
 
@@ -458,19 +459,29 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
 
     return (
       <div className={styles.controlsTest}>
-        <DynamicForm
+        {/* <DynamicForm
           context={this.props.context}
-          listId={"2baf2f85-4f31-46c4-8f87-5fed93ecd20c"}
+          // listId={"2baf2f85-4f31-46c4-8f87-5fed93ecd20c"}
+          listId={"e5896308-e2ce-4af4-ae6c-c1ecc5b74e2b"}
           //listItemId={26}
           onCancelled={() => { console.log('Cancelled'); }}
           onSubmitted={async (listItem) => { console.log(listItem); }}>
 
-          </DynamicForm>
+        </DynamicForm> */}
+        <ModernTaxonomyPicker
+          allowMultipleSelections={false}
+          termSetId="2295cfe7-ae45-48a4-885f-045593aaa14f"
+          panelTitle=""
+          label="test test test"
+          context={this.props.context}
+          // isTermSetSelectable={false}
+          initialValues={[]}
+        />
       </div>
     );
   }
 
-  private _getPage(page: number){
+  private _getPage(page: number) {
     console.log('Page:', page);
   }
 
