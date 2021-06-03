@@ -3,6 +3,7 @@ import { BaseComponentContext } from '@microsoft/sp-component-base';
 import { SPHttpClient, SPHttpClientResponse, ISPHttpClientOptions } from '@microsoft/sp-http';
 
 import { sp } from '@pnp/sp';
+import '@pnp/sp/taxonomy';
 import { ITermInfo, ITermSetInfo } from '@pnp/sp/taxonomy';
 
 export interface ODataCollection<T> {
@@ -71,7 +72,7 @@ export class SPTaxonomyService {
 
   public async getTermSetInfo(termSetId: string): Promise<ITermSetInfo | undefined> {
     if (!termSetId) return undefined;
-    const tsInfo = await sp.termStore.sets.getById(termSetId)();
+    const tsInfo = await sp.termStore.sets.getById(termSetId).get();
     return tsInfo;
   }
 }
