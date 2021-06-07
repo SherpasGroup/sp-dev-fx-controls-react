@@ -1,56 +1,32 @@
 import * as React from 'react';
 import styles from './TaxonomyForm.module.scss';
-// import { ITaxonomyFormProps } from './ITaxonomyFormProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import { Checkbox, ChoiceGroup, classNamesFunction, DetailsRow, GroupedList, GroupHeader, ICheckboxStyleProps, ICheckboxStyles, IChoiceGroupOption, IChoiceGroupOptionProps, IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles, IChoiceGroupStyleProps, IChoiceGroupStyles, IColumn, IGroup, IGroupedList, IGroupFooterProps, IGroupHeaderCheckboxProps, IGroupHeaderProps, IGroupRenderProps, IGroupShowAllProps, ILinkStyleProps, ILinkStyles, IRenderFunction, ISpinnerStyleProps, ISpinnerStyles, IStyleFunctionOrObject, ITag, Label, Link, Spinner, TagPicker } from 'office-ui-fabric-react';
-// import { createListItems, createGroups, IExampleItem } from '@uifabric/example-data';
-import { Selection, SelectionMode, SelectionZone } from 'office-ui-fabric-react/lib/Selection';
-import { useBoolean, useConst } from '@uifabric/react-hooks';
+import { Checkbox, ChoiceGroup, classNamesFunction, DetailsRow, GroupedList, GroupHeader, IBasePickerStyleProps, IBasePickerStyles, ICheckboxStyleProps, ICheckboxStyles, IChoiceGroupOption, IChoiceGroupOptionProps, IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles, IChoiceGroupStyleProps, IChoiceGroupStyles, IColumn, IGroup, IGroupedList, IGroupFooterProps, IGroupHeaderCheckboxProps, IGroupHeaderProps, IGroupHeaderStyleProps, IGroupHeaderStyles, IGroupRenderProps, IGroupShowAllProps, ILinkStyleProps, ILinkStyles, IListProps, IRenderFunction, ISpinnerStyleProps, ISpinnerStyles, IStyleFunctionOrObject, ITag, Label, Link, Spinner, TagPicker } from 'office-ui-fabric-react';
 import { ITermInfo, ITermSetInfo } from '@pnp/sp/taxonomy';
 import { Guid } from '@microsoft/sp-core-library';
 import { BaseComponentContext } from '@microsoft/sp-component-base';
+import { css } from "@uifabric/utilities/lib/css";
 
 export interface ITaxonomyFormProps {
-  // termSetName: string;
-  // termSetId: string;
   context: BaseComponentContext;
-  multiSelection: boolean;
+  allowMultipleSelections: boolean;
   terms: ITermInfo[];
   termSetId: Guid;
   pageSize: number;
+  selectedPanelOptions: ITag[];
+  setSelectedPanelOptions: React.Dispatch<React.SetStateAction<ITag[]>>;
   onResolveSuggestions: (filter: string, selectedItems?: ITag[]) => ITag[] | PromiseLike<ITag[]>;
   onLoadMoreData: (termSetId: Guid, parentTermId?: Guid, skiptoken?: string, hideDeprecatedTerms?: boolean, pageSize?: number) => Promise<{ value: ITermInfo[], skiptoken: string }>;
   getTermSetInfo: (termSetId: Guid) => Promise<ITermSetInfo | undefined>;
 }
 
-// const multiSelect = true;
-// const groupCount = 3;
-// const groupDepth = 3;
-// const items: IExampleItem[] = createListItems(Math.pow(groupCount, groupDepth + 1));
-// const groups = createGroups(groupCount, groupDepth, 0, groupCount, 1, "Test", true);
-// const columns = Object.keys(items[0])
-//   .slice(0, 3)
-//   .map(
-//     (key: string): IColumn => ({
-//       key: key,
-//       name: key,
-//       fieldName: key,
-//       minWidth: 300,
-//     }),
-//   );
-// let mockGroups: IGroup[] = [];
-
 export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITaxonomyFormProps> {
   const groupedListRef = React.useRef<IGroupedList>();
 
-  const [selectedOptions, setSelectedOptions] = React.useState<ITag[]>([]);
   const [groupsLoading, setGroupsLoading] = React.useState<string[]>([]);
   const [groups, setGroups] = React.useState<IGroup[]>([]);
 
 
   React.useEffect(() => {
-    // if (props.terms != null) {
-    // let group: IGroup = { name: name, key: name, startIndex: -1, count: 50, level: 1, isCollapsed: true, data: {}, hasMoreData: true };
     setGroupsLoading((prevGroupsLoading) => [...prevGroupsLoading, props.termSetId.toString()]);
 
     props.getTermSetInfo(props.termSetId)
@@ -100,7 +76,7 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
               recurseGroups(child);
             }
           }
-        }
+        };
         let newGroupsState: IGroup[] = [];
         for (const prevGroup of prevGroups) {
           recurseGroups(prevGroup);
@@ -150,7 +126,7 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
               recurseGroups(child);
             }
           }
-        }
+        };
         let newGroupsState: IGroup[] = [];
         for (const prevGroup of prevGroups) {
           recurseGroups(prevGroup);
@@ -164,15 +140,15 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
   };
 
   const onChoiceChange = (ev?: React.FormEvent<HTMLElement | HTMLInputElement>, option?: IChoiceGroupOption): void => {
-    setSelectedOptions([{ key: option.key, name: option.text }]);
+    props.setSelectedPanelOptions([{ key: option.key, name: option.text }]);
   };
 
   const onCheckboxChange = (ev?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean, tag?: ITag): void => {
     if (checked) {
-      setSelectedOptions((prevOptions) => [...prevOptions, tag]);
+      props.setSelectedPanelOptions((prevOptions) => [...prevOptions, tag]);
     }
     else {
-      setSelectedOptions((prevOptions) => prevOptions.filter((value) => value.key !== tag.key));
+      props.setSelectedPanelOptions((prevOptions) => prevOptions.filter((value) => value.key !== tag.key));
     }
   };
 
@@ -182,9 +158,10 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
         <Label>{groupHeaderProps.group.name}</Label>
       );
     }
-    if (props.multiSelection) {
-      const isSelected = selectedOptions.some(value => value.key === groupHeaderProps.group.key);
-      const selectedStyles: IStyleFunctionOrObject<ICheckboxStyleProps, ICheckboxStyles> = isSelected ? { label: { fontWeight: "bold", color: "#000000" } } : { label: { fontWeight: "normal", color: "#000000" } };
+    if (props.allowMultipleSelections) {
+      const isSelected = props.selectedPanelOptions.some(value => value.key === groupHeaderProps.group.key);
+      const selectedStyles: IStyleFunctionOrObject<ICheckboxStyleProps, ICheckboxStyles> = isSelected ? { label: { fontWeight: "bold" } } : { label: { fontWeight: "normal" } };
+
       return (
         <Checkbox
           key={groupHeaderProps.group.key}
@@ -194,39 +171,35 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
           checked={isSelected}
           styles={selectedStyles}
           disabled={groupHeaderProps.group.data.term.isAvailableForTagging.filter((t) => t.setId === props.termSetId.toString())[0].isAvailable === false}
+          onRenderLabel={(p) => <span className={css(styles.checkbox, isSelected && styles.selectedCheckbox)} title={p.title}>
+                                 {p.label}
+                                </span>}
         />
       );
     }
     else {
-      const isSelected = selectedOptions?.[0]?.key === groupHeaderProps.group.key;
-      const selectedStyle: IStyleFunctionOrObject<IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles> = isSelected ? { choiceFieldWrapper: { fontWeight: "bold" }, labelWrapper: {color: "#000000"} } : { choiceFieldWrapper: { fontWeight: "normal" }, labelWrapper: {color: "#000000"} };
+      const isSelected = props.selectedPanelOptions?.[0]?.key === groupHeaderProps.group.key;
+      const selectedStyle: IStyleFunctionOrObject<IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles> = isSelected ? { choiceFieldWrapper: { fontWeight: "bold" } } : { choiceFieldWrapper: { fontWeight: "normal" } };
       const getClassNames = classNamesFunction<IChoiceGroupOptionStyleProps, IChoiceGroupOptionStyles>();
-
-      const LARGE_IMAGE_SIZE = 71;
-
-      const DEFAULT_PROPS: Partial<IChoiceGroupOptionProps> = {
-        // This ensures default imageSize value doesn't mutate. Mutation can cause style re-calcuation.
-        imageSize: { width: 32, height: 32 },
-      };
 
       const classNames = getClassNames(selectedStyle!, {
         theme: undefined,
-        hasIcon: true,
-        hasImage: true,
+        hasIcon: false,
+        hasImage: false,
         checked: false,
         disabled: false,
         imageIsLarge: false,
         imageSize: undefined,
         focused: false,
       });
-
-      const options: IChoiceGroupOption[] = [{ key: groupHeaderProps.group.key, text: groupHeaderProps.group.name, styles: selectedStyle, onRenderLabel: (p) => <label htmlFor={p.id} className={classNames.field}><span id={p.labelId} /*style={}*/ color={"#000000"}>{p.text}</span></label> }];
+      const isDisabled = groupHeaderProps.group.data.term.isAvailableForTagging.filter((t) => t.setId === props.termSetId.toString())[0].isAvailable === false;
+      const options: IChoiceGroupOption[] = [{ key: groupHeaderProps.group.key, text: groupHeaderProps.group.name, styles: selectedStyle, onRenderLabel: (p) => <Label htmlFor={p.id} className={classNames.field}><span id={p.labelId} className={css(styles.choiceOption, isSelected && styles.selectedChoiceOption)}>{p.text}</span></Label> }];
       return (
         <ChoiceGroup
           options={options}
-          selectedKey={selectedOptions?.[0]?.key}
+          selectedKey={props.selectedPanelOptions?.[0]?.key}
           onChange={onChoiceChange}
-          disabled={groupHeaderProps.group.data.term.isAvailableForTagging.filter((t) => t.setId === props.termSetId.toString())[0].isAvailable === false}
+          disabled={isDisabled}
         />
       );
     }
@@ -236,16 +209,19 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
     const headerCountStyle = { "display": "none" };
     const checkButtonStyle = { "display": "none" };
     const expandStyle = { "visibility": "hidden" };
+    const groupHeaderStyles: IStyleFunctionOrObject<IGroupHeaderStyleProps, IGroupHeaderStyles> = {
+      expand: !headerProps.group.children || headerProps.group.level === 0 ? expandStyle : null,
+      expandIsCollapsed: !headerProps.group.children || headerProps.group.level === 0 ? expandStyle : null,
+      check: checkButtonStyle,
+      headerCount: headerCountStyle,
+      groupHeaderContainer: {height: 36, paddingTop: 3, paddingBottom: 3, paddingLeft: 3, paddingRight: 3, alignItems: "center", },
+      root: {height: 42}
+    };
 
     return (
       <GroupHeader
         {...headerProps}
-        styles={{
-          "expand": !headerProps.group.children || headerProps.group.level === 0 ? expandStyle : null,
-          "expandIsCollapsed": !headerProps.group.children || headerProps.group.level === 0 ? expandStyle : null,
-          "check": checkButtonStyle,
-          "headerCount": headerCountStyle,
-        }}
+        styles={groupHeaderStyles}
         onRenderTitle={onRenderTitle}
         onToggleCollapse={onToggleCollapse}
         indentWidth={20}
@@ -316,38 +292,41 @@ export function TaxonomyForm(props: ITaxonomyFormProps): React.ReactElement<ITax
   }
 
   const onPickerChange = (itms?: ITag[]): void => {
-    // const newSelection = itms.map(value => value.key.toString());
-    setSelectedOptions(itms || []);
+    props.setSelectedPanelOptions(itms || []);
   };
+
+  const tagPickerStyles: IStyleFunctionOrObject<IBasePickerStyleProps, IBasePickerStyles> = {text: {borderStyle: 'none', borderWidth: '0px' }};
 
   return (
     <div className={styles.taxonomyForm}>
-      {/* <div className={styles.container}> */}
-        {/* <div className={styles.row}> */}
-          {/* <div className={styles.column}> */}
-            {/* <span className={styles.title}>Welcome to SharePoint!</span>
-            <p className={styles.subTitle}>Customize SharePoint experiences using Web Parts.</p>
-            <p className={styles.description}>{escape(props.description)}</p> */}
-            <TagPicker
-              removeButtonAriaLabel="Remove"
-              onResolveSuggestions={props.onResolveSuggestions}
-              itemLimit={props.multiSelection ? undefined : 1}
-              // selectedItems={getITagsFromSelected()}
-              selectedItems={selectedOptions}
-              onChange={onPickerChange}
-              getTextFromItem={getTagText}
-            />
-            <GroupedList
-              componentRef={groupedListRef}
-              items={[]}
-              onRenderCell={null}
-              groups={groups}
-              groupProps={groupProps}
-            />
-            {/* {(selectedOptions.map((value) => { return <><p className={styles.description}>{value}</p><br /></>; }))} */}
-          {/* </div> */}
-        {/* </div> */}
-      {/* </div> */}
+      <div className={styles.taxonomyTreeSelector}>
+        <div>
+          <TagPicker
+            removeButtonAriaLabel="Remove"
+            onResolveSuggestions={props.onResolveSuggestions}
+            itemLimit={props.allowMultipleSelections ? undefined : 1}
+            selectedItems={props.selectedPanelOptions}
+            onChange={onPickerChange}
+            getTextFromItem={getTagText}
+            styles={tagPickerStyles}
+            inputProps={{
+              "aria-label": "Tag Picker",
+              placeholder: "Ange en term som du vill tagga"
+            }}
+          />
+        </div>
+      </div>
+      <Label className={styles.taxonomyTreeLabel}>Välj en tagg</Label>
+      <div>
+        <GroupedList
+          componentRef={groupedListRef}
+          items={[]}
+          onRenderCell={null}
+          groups={groups}
+          groupProps={groupProps}
+          onShouldVirtualize={(p: IListProps<any>) => false}
+        />
+      </div>
     </div>
   );
 }

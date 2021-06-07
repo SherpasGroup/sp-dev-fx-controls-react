@@ -28,14 +28,14 @@ export class SPTaxonomyService {
       try {
         const parser = new LambdaParser(async (r: Response) => {
           const json = await r.json();
-          let skiptoken="";
+          let newSkiptoken="";
           if(json["@odata.nextLink"]) {
             var urlParams = new URLSearchParams(json["@odata.nextLink"].split("?")[1]);
             if(urlParams.has("$skiptoken")) {
-              skiptoken = urlParams.get("$skiptoken");
+              newSkiptoken = urlParams.get("$skiptoken");
             }
           }
-          return { value: json.value, skiptoken: skiptoken };
+          return { value: json.value, skiptoken: newSkiptoken };
         });
 
         let legacyChildrenUrlAndQuery = "";
@@ -74,7 +74,7 @@ export class SPTaxonomyService {
   public async searchTerm(termSetId: Guid, label: string, languageTag: string, parentTermId?: Guid, stringMatchId: string = "0", pageSize: number = 50): Promise<ITermInfo[]> {
     try {
       const searchTermUrl = sp.termStore.concat(`/searchTerm(label='${label}',setId='${termSetId}',languageTag='${languageTag}',stringMatchId='${stringMatchId}'${parentTermId ? ",parentTermId='" + parentTermId + "'" : ""})`).toUrl();
-      const searchTermQuery = SharePointQueryableCollection(searchTermUrl).top(pageSize)
+      const searchTermQuery = SharePointQueryableCollection(searchTermUrl).top(pageSize);
       const filteredTerms = await searchTermQuery();
       return filteredTerms;
     } catch (error) {

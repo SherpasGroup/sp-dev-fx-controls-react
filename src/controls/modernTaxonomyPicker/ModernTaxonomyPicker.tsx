@@ -23,7 +23,7 @@ import * as strings from 'ControlStrings';
 import TermPicker from '../taxonomyPicker/TermPicker';
 import { TaxonomyForm } from './taxonomyForm';
 import { Guid } from '@microsoft/sp-core-library';
-import { ITag } from 'office-ui-fabric-react';
+import { IIconProps, IStackTokens, ITag, Stack, TagPicker } from 'office-ui-fabric-react';
 
 // TODO: remove/replace interface IPickerTerm
 export interface IPickerTerm {
@@ -44,7 +44,7 @@ export interface IModernTaxonomyPickerProps {
   panelTitle: string;
   label: string;
   context: BaseComponentContext;
-  initialValues?: IPickerTerms;
+  initialValues?: ITag[];
   errorMessage?: string; // TODO: is this needed?
   disabled?: boolean;
   required?: boolean;
@@ -56,13 +56,14 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
   const [termSetName, setTermSetName] = React.useState<string>();
 
   const [terms, setTerms] = React.useState<ITermInfo[]>([]);
-  const [activeNodes, setActiveNodes] = React.useState<IPickerTerms>(props.initialValues || []);
   const previousValues = React.useRef<IPickerTerms>([]);
   const [errorMessage, setErrorMessage] = React.useState(props.errorMessage);
   const [internalErrorMessage, setInternalErrorMessage] = React.useState<string>();
   const [panelIsOpen, setPanelIsOpen] = React.useState(false);
   const [resetOnClose, setResetOnClose] = React.useState(true); // was called cancel
   const [loading, setLoading] = React.useState(false); // was called loaded
+  const [selectedOptions, setSelectedOptions] = React.useState<ITag[]>([]);
+  const [selectedPanelOptions, setSelectedPanelOptions] = React.useState<ITag[]>([]);
 
   const invalidTerm = React.useRef<string>(null);
 
@@ -89,7 +90,7 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
   // }, [props.termSetId]);
 
   React.useEffect(() => {
-    setActiveNodes(props.initialValues || []);
+    setSelectedOptions(props.initialValues || []);
   }, [props.initialValues]);
 
   React.useEffect(() => {
@@ -102,7 +103,7 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
     }
 
     // Store the current code value
-    previousValues.current = cloneDeep(activeNodes);
+    // previousValues.current = cloneDeep(activeNodes);
     setResetOnClose(true);
     setLoading(true);
 
@@ -117,9 +118,9 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
   function onClosePanel(): void {
     setLoading(false);
     setPanelIsOpen(false);
-    if (resetOnClose) {
-      setActiveNodes(previousValues.current);
-    }
+    // if (resetOnClose) {
+    //   setActiveNodes(previousValues.current);
+    // }
   }
 
   function validate(selectedTerms): void {
@@ -127,14 +128,15 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
   }
 
   function onSave(): void {
-    setResetOnClose(false);
+    // setResetOnClose(false);
+    setSelectedOptions([...selectedPanelOptions]);
     onClosePanel();
 
-    validate(activeNodes);
+    // validate(activeNodes);
   }
 
   function termsFromPickerChanged(pickerTerms: IPickerTerms) {
-    setActiveNodes(pickerTerms);
+    // setActiveNodes(pickerTerms);
     validate(pickerTerms);
   }
 
@@ -204,11 +206,11 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
         return selectedItem.key !== term.id;
       }
     });
-    const filteredTermsAndAvailable = filteredTermsWithoutSelectedItems.filter((term) => term.isAvailableForTagging.filter((t) => t.setId === props.termSetId)[0].isAvailable)
+    const filteredTermsAndAvailable = filteredTermsWithoutSelectedItems.filter((term) => term.isAvailableForTagging.filter((t) => t.setId === props.termSetId)[0].isAvailable);
     const filteredTags = filteredTermsAndAvailable.map((term) => {
       const key = term.id;
-      const name = term.labels.filter((label) => (languageTag === "" || label.languageTag === languageTag) &&
-        label.name.toLowerCase().indexOf(filter.toLowerCase()) === 0)[0]?.name
+      const name = term.labels.filter((termLabel) => (languageTag === "" || termLabel.languageTag === languageTag) &&
+        termLabel.name.toLowerCase().indexOf(filter.toLowerCase()) === 0)[0]?.name;
       return { key: key, name: name };
     });
     return filteredTags;
@@ -233,21 +235,25 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
       {label && <Label required={required}>{label}</Label>}
       <div className={styles.termField}>
         <div className={styles.termFieldInput}>
-          <TermPicker
-            context={context}
-            termPickerHostProps={{ label: 'label', panelTitle: 'panelTitle', context: props.context, termsetNameOrID: props.termSetId }}
-            disabled={disabled}
-            value={activeNodes}
-            // isTermSetSelectable={isTermSetSelectable}
-            isTermSetSelectable={false}
-            onChanged={termsFromPickerChanged}
-            onInputChange={onInputChange}
-            onBlur={onBlur}
-            allowMultipleSelections={allowMultipleSelections}
-          />
+        <TagPicker
+
+          removeButtonAriaLabel="Remove"
+          onResolveSuggestions={onResolveSuggestions}
+          itemLimit={allowMultipleSelections ? undefined : 1}
+          selectedItems={selectedOptions}
+          onChange={(itms?: ITag[]) => {
+            setSelectedOptions(itms || []);
+            setSelectedPanelOptions(itms || []);
+          }}
+          getTextFromItem={(tag: ITag, currentValue?: string) => tag.name}
+          inputProps={{
+            "aria-label": "Tag Picker",
+            placeholder: "Ange en term som du vill tagga"
+          }}
+        />
         </div>
         <div className={styles.termFieldButton}>
-          <IconButton disabled={disabled} iconProps={{ iconName: 'Tag' }} onClick={onOpenPanel} />
+          <IconButton disabled={disabled} iconProps={{ iconName: 'Tag' } as IIconProps} onClick={onOpenPanel} />
         </div>
       </div>
 
@@ -262,11 +268,15 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
         type={PanelType.medium}
         headerText={panelTitle}
         onRenderFooterContent={() => {
+          const horizontalGapStackTokens: IStackTokens = {
+            childrenGap: 10,
+          };
+
           return (
-            <div className={styles.actions}>
-              <PrimaryButton iconProps={{ iconName: 'Save' }} text={strings.SaveButtonLabel} value="Save" onClick={onSave} />
-              <DefaultButton iconProps={{ iconName: 'Cancel' }} text={strings.CancelButtonLabel} value="Cancel" onClick={onClosePanel} />
-            </div>
+            <Stack horizontal disableShrink tokens={horizontalGapStackTokens}>
+              <PrimaryButton text={strings.SaveButtonLabel} value="Save" onClick={onSave} />
+              <DefaultButton text={strings.CancelButtonLabel} value="Cancel" onClick={onClosePanel} />
+            </Stack>
           );
         }}>
 
@@ -277,26 +287,8 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
         {
           loading === false && props.termSetId && (
             <div key={props.termSetId} >
-              <h3>{termSetName}</h3>
-              {/* <TermParent anchorId={anchorId}
-                autoExpand={null}
-                // termset={termSetAndTerms}
-                termset={null}
-                isTermSetSelectable={isTermSetSelectable}
-                termSetSelectedChange={termSetSelectedChange}
-                activeNodes={activeNodes}
-                disabledTermIds={disabledTermIds}
-                disableChildrenOfDisabledParents={disableChildrenOfDisabledParents}
-                changedCallback={termsChanged}
-                multiSelection={allowMultipleSelections}
-                spTermService={termsService}
-
-                updateTaxonomyTree={updateTaxonomyTree}
-                termActions={termActions}
-              /> */}
               <TaxonomyForm
-                // description=""
-                multiSelection={allowMultipleSelections}
+                allowMultipleSelections={allowMultipleSelections}
                 terms={terms}
                 onResolveSuggestions={onResolveSuggestions}
                 onLoadMoreData={termsService.getTerms}
@@ -304,6 +296,8 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
                 context={props.context}
                 termSetId={Guid.parse(props.termSetId)}
                 pageSize={50}
+                selectedPanelOptions={selectedPanelOptions}
+                setSelectedPanelOptions={setSelectedPanelOptions}
               />
             </div>
           )
