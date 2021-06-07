@@ -470,7 +470,7 @@ export default class ControlsTest extends React.Component<IControlsTestProps, IC
         </DynamicForm> */}
         <ModernTaxonomyPicker
           allowMultipleSelections={false}
-          termSetId="2295cfe7-ae45-48a4-885f-045593aaa14f"
+          termSetId="30ce73b1-7e6d-4a67-beb8-a119c3b4b4c2"
           panelTitle=""
           label="test test test"
           context={this.props.context}

@@ -22,6 +22,8 @@ import * as strings from 'ControlStrings';
 // TODO: this import should be replaced with our own tag-picker
 import TermPicker from '../taxonomyPicker/TermPicker';
 import { TaxonomyForm } from './taxonomyForm';
+import { Guid } from '@microsoft/sp-core-library';
+import { ITag } from 'office-ui-fabric-react';
 
 // TODO: remove/replace interface IPickerTerm
 export interface IPickerTerm {
@@ -38,6 +40,7 @@ export interface IPickerTerms extends Array<IPickerTerm> { }
 export interface IModernTaxonomyPickerProps {
   allowMultipleSelections: boolean;
   termSetId: string;
+  anchorTermId?: string;
   panelTitle: string;
   label: string;
   context: BaseComponentContext;
@@ -67,23 +70,23 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
     sp.setup(props.context);
   }, []);
 
-  React.useEffect(() => {
-    async function updateTermSetInfo(id: string): Promise<void> {
-      if (!id) {
-        return;
-      }
+  // React.useEffect(() => {
+  //   async function updateTermSetInfo(id: string): Promise<void> {
+  //     if (!id) {
+  //       return;
+  //     }
 
-      try {
-        const termSetInfo: ITermSetInfo = await termsService.getTermSetInfo(id);
-        // setTermSetId(termSetInfo.id);
-        setTermGroupId(termSetInfo.groupId);
-        setTermSetName(termSetInfo.localizedNames?.[0].name); // TODO: this should be changed to select a name based on localization
-      } catch (error) {
-      }
-    }
+  //     try {
+  //       const termSetInfo: ITermSetInfo = await termsService.getTermSetInfo(id);
+  //       // setTermSetId(termSetInfo.id);
+  //       setTermGroupId(termSetInfo.groupId);
+  //       setTermSetName(termSetInfo.localizedNames?.[0].name); // TODO: this should be changed to select a name based on localization
+  //     } catch (error) {
+  //     }
+  //   }
 
-    updateTermSetInfo(props.termSetId);
-  }, [props.termSetId]);
+  //   updateTermSetInfo(props.termSetId);
+  // }, [props.termSetId]);
 
   React.useEffect(() => {
     setActiveNodes(props.initialValues || []);
@@ -104,7 +107,7 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
     setLoading(true);
 
     const siteUrl = props.context.pageContext.site.absoluteUrl;
-    const newTerms = await termsService.getTerms(siteUrl, termGroupId, props.termSetId, true, 50);
+    const newTerms = await termsService.getTerms(Guid.parse(props.termSetId), Guid.empty, "", true, 50);
     setTerms(newTerms.value);
 
     setLoading(false);
@@ -185,6 +188,30 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
 
   async function updateTaxonomyTree(): Promise<void> {
     // not yet implemented
+  }
+
+  async function onResolveSuggestions(filter: string, selectedItems?: ITag[]): Promise<ITag[]> {
+    const languageTag = props.context.pageContext.cultureInfo.currentUICultureName !== "" ? props.context.pageContext.cultureInfo.currentUICultureName : props.context.pageContext.web.languageName;
+    if (filter === "") {
+      return [];
+    }
+    const filteredTerms = await termsService.searchTerm(Guid.parse(props.termSetId), filter, languageTag, props.anchorTermId ? Guid.parse(props.anchorTermId) : undefined);
+    const filteredTermsWithoutSelectedItems = filteredTerms.filter((term) => {
+      if (!selectedItems || selectedItems.length === 0) {
+        return true;
+      }
+      for (const selectedItem of selectedItems) {
+        return selectedItem.key !== term.id;
+      }
+    });
+    const filteredTermsAndAvailable = filteredTermsWithoutSelectedItems.filter((term) => term.isAvailableForTagging.filter((t) => t.setId === props.termSetId)[0].isAvailable)
+    const filteredTags = filteredTermsAndAvailable.map((term) => {
+      const key = term.id;
+      const name = term.labels.filter((label) => (languageTag === "" || label.languageTag === languageTag) &&
+        label.name.toLowerCase().indexOf(filter.toLowerCase()) === 0)[0]?.name
+      return { key: key, name: name };
+    });
+    return filteredTags;
   }
 
   const {
@@ -271,6 +298,12 @@ export function ModernTaxonomyPicker(props: IModernTaxonomyPickerProps) {
                 // description=""
                 multiSelection={allowMultipleSelections}
                 terms={terms}
+                onResolveSuggestions={onResolveSuggestions}
+                onLoadMoreData={termsService.getTerms}
+                getTermSetInfo={termsService.getTermSetInfo}
+                context={props.context}
+                termSetId={Guid.parse(props.termSetId)}
+                pageSize={50}
               />
             </div>
           )
