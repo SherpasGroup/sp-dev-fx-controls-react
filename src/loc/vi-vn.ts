@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Tìm kiếm trên web",
   "Yes": "Có",
   "SelectedLabel": "Đã chọn",
-  "SelectIcon": "Chọn biểu tượng"
+  "SelectIcon": "Chọn biểu tượng",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Nhập cụm từ bạn muốn gắn thẻ",
+  "ModernTaxonomyPickerTreeTitle": "Chọn thẻ",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Thêm thẻ",
+  "ModernTaxonomyPickerApplyButtonText": "Sử dụng",
+  "ModernTaxonomyPickerCancelButtonText": "Hủy",
+  "ModernTaxonomyPickerLoadMoreText": "Tìm hiểu thêm",
+  "ModernTaxonomyPickerRemoveButtonText": "Xóa",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Đóng"
 };
 });

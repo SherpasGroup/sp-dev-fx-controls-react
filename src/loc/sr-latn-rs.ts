@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Pretraživanje Weba",
   "Yes": "Da",
   "SelectedLabel": "Izabrano",
-  "SelectIcon": "Izaberite ikonu"
+  "SelectIcon": "Izaberite ikonu",
+  "ModernTakonomiPickerDefaultPlaceHolder": "Unesite termin koji želite da označite",
+  "ModernTakonomiPickerTreeTitle": "Izaberite oznaku",
+  "ModernTakonomiPickerAddTagButtonTooltip": "Dodaj oznaku",
+  "ModernTakonomiPickerAppliButtonTekt": "Koristi",
+  "ModernTakonomiPickerCancelButtonTekt": "Otkaži",
+  "ModernTakonomiPickerLoadMoreTekt": "Saznajte više",
+  "ModernTakonomiPickerRemoveButtonTekt": "Izbriši",
+  "ModernTakonomiPickerPanelCloseButtonTekt": "Zatvori"
 };
 });

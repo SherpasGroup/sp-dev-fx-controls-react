@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Www-haku",
   "Yes": "Kyllä",
   "SelectedLabel": "Valittu",
-  "SelectIcon": "Valitse kuvake"
+  "SelectIcon": "Valitse kuvake",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Kirjoita tagi, jonka haluat merkitä",
+  "ModernTaxonomyPickerTreeTitle": "Valitse tunniste",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Lisää tunniste",
+  "ModernTaxonomyPickerApplyButtonText": "Käytä",
+  "ModernTaxonomyPickerCancelButtonText": "Peruuta",
+  "ModernTaxonomyPickerLoadMoreText": "Lisätietoja",
+  "ModernTaxonomyPickerRemoveButtonText": "Poista",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Sulje"
 };
 });

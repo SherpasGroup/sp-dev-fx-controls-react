@@ -326,7 +326,14 @@ TeamsChannelPickerNoresultsFoundText: "No channels found",
   "WebSearchLinkLabel": "Pesquisa na Web",
   "Yes": "Sim",
   "SelectedLabel": "Selecionado",
-  "SelectIcon": "Selecionar ícone"
-
+  "SelectIcon": "Selecionar ícone",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Digite um termo que deseja marcar",
+  "ModernTaxonomyPickerTreeTitle": "Selecione uma tag",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Adicionar tag",
+  "ModernTaxonomyPickerApplyButtonText": "Use",
+  "ModernTaxonomyPickerCancelButtonText": "Cancelar",
+  "ModernTaxonomyPickerLoadMoreText": "Saiba mais",
+  "ModernTaxonomyPickerRemoveButtonText": "Delete",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Fechar"
 };
 });

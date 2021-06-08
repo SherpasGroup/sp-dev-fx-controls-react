@@ -338,6 +338,14 @@ define([], () => {
     TeamPickerSugestionsHeaderText: "Suggested Teams",
     TeamsChannelPickerButtonRemoveTitle: "remove",
     TeamsChannelPickerNoresultsFoundText: "No channels found",
-    SelectIcon: "Hautatu ikonoa"
+    SelectIcon: "Hautatu ikonoa",
+    ModernTaxonomyPickerDefaultPlaceHolder: "Idatzi etiketatu nahi duzun terminoa",
+    ModernTaxonomyPickerTreeTitle: "Aukeratu etiketa",
+    ModernTaxonomyPickerAddTagButtonTooltip: "Gehitu etiketa",
+    ModernTaxonomyPickerApplyButtonText: "Erabili",
+    ModernTaxonomyPickerCancelButtonText: "Utzi",
+    ModernTaxonomyPickerLoadMoreText: "Lortu informazio gehiago",
+    ModernTaxonomyPickerRemoveButtonText: "Ezabatu",
+    ModernTaxonomyPickerPanelCloseButtonText: "Itxi"
   };
 });

@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Veebi otsing",
   "Yes": "Jah",
   "SelectedLabel": "Valitud",
-  "SelectIcon": "Vali ikoon"
+  "SelectIcon": "Vali ikoon",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Sisestage termin, mille soovite märgistada",
+  "ModernTaxonomyPickerTreeTitle": "Valige silt",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Lisa silt",
+  "ModernTaxonomyPickerApplyButtonText": "Kasuta",
+  "ModernTaxonomyPickerCancelButtonText": "Tühista",
+  "ModernTaxonomyPickerLoadMoreText": "Lisateave",
+  "ModernTaxonomyPickerRemoveButtonText": "Kustuta",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Sule"
 };
 });

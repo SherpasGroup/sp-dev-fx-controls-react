@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Wyszukiwanie w Internecie",
   "Yes": "Tak",
   "SelectedLabel": "Wybrany",
-  "SelectIcon": "Wybierz ikonę"
+  "SelectIcon": "Wybierz ikonę",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Wprowadź termin, który chcesz oznaczyć",
+  "ModernTaxonomyPickerTreeTitle": "Wybierz tag",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Dodaj tag",
+  "ModernTaxonomyPickerApplyButtonText": "Użyj",
+  "ModernTaxonomyPickerCancelButtonText": "Anuluj",
+  "ModernTaxonomyPickerLoadMoreText": "Dowiedz się więcej",
+  "ModernTaxonomyPickerRemoveButtonText": "Usuń",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Zamknij"
 };
 });

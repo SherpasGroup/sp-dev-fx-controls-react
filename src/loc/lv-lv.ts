@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Web meklēšana",
   "Yes": "jā",
   "SelectedLabel": "Atlasīts",
-  "SelectIcon": "Atlasīt ikonu"
+  "SelectIcon": "Atlasīt ikonu",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Ievadiet vārdu, kuru vēlaties atzīmēt",
+  "ModernTaxonomyPickerTreeTitle": "Atlasiet tagu",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Pievienot tagu",
+  "ModernTaxonomyPickerApplyButtonText": "Izmantot",
+  "ModernTaxonomyPickerCancelButtonText": "Atcelt",
+  "ModernTaxonomyPickerLoadMoreText": "Uzziniet vairāk",
+  "ModernTaxonomyPickerRemoveButtonText": "Dzēst",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Aizvērt"
 };
 });

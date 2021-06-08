@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Websøgning",
   "Yes": "Ja",
   "SelectedLabel": "Valgt",
-  "SelectIcon": "Vælg ikon"
+  "SelectIcon": "Vælg ikon",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Indtast et udtryk, du vil tagge",
+  "ModernTaxonomyPickerTreeTitle": "Vælg et tag",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Tilføj tag",
+  "ModernTaxonomyPickerApplyButtonText": "Brug",
+  "ModernTaxonomyPickerCancelButtonText": "Annuller",
+  "ModernTaxonomyPickerLoadMoreText": "Lær mere",
+  "ModernTaxonomyPickerRemoveButtonText": "Slet",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Luk"
 };
 });

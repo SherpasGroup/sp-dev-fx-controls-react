@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "網路搜索",
   "Yes": "是的",
   "SelectedLabel": "已選取",
-  "SelectIcon": "選取圖示"
+  "SelectIcon": "選取圖示",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "輸入您要標記的術語",
+  "ModernTaxonomyPickerTreeTitle": "選擇一個標籤",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "添加標籤",
+  "ModernTaxonomyPickerApplyButtonText": "使用",
+  "ModernTaxonomyPickerCancelButtonText": "取消",
+  "ModernTaxonomyPickerLoadMoreText": "了解更多",
+  "ModernTaxonomyPickerRemoveButtonText": "刪除",
+  "ModernTaxonomyPickerPanelCloseButtonText": "關閉"
 };
 });

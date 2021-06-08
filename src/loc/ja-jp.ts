@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "ウェブ検索",
   "Yes": "はい",
   "SelectedLabel": "選択された",
-  "SelectIcon": "アイコンの選択"
+  "SelectIcon": "アイコンの選択",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "タグ付けする用語を入力してください",
+  "ModernTaxonomyPickerTreeTitle": "タグを選択",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "タグを追加",
+  "ModernTaxonomyPickerApplyButtonText": "使用",
+  "ModernTaxonomyPickerCancelButtonText": "キャンセル",
+  "ModernTaxonomyPickerLoadMoreText": "詳細",
+  "ModernTaxonomyPickerRemoveButtonText": "削除",
+  "ModernTaxonomyPickerPanelCloseButtonText": "閉じる"
 };
 });

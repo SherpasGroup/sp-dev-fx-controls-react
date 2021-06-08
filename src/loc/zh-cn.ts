@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "网络搜索",
   "Yes": "是的",
   "SelectedLabel": "所选",
-  "SelectIcon": "选择图标"
+  "SelectIcon": "选择图标",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "输入您要标记的术语",
+  "ModernTaxonomyPickerTreeTitle": "选择一个标签",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "添加标签",
+  "ModernTaxonomyPickerApplyButtonText": "使用",
+  "ModernTaxonomyPickerCancelButtonText": "取消",
+  "ModernTaxonomyPickerLoadMoreText": "了解更多",
+  "ModernTaxonomyPickerRemoveButtonText": "删除",
+  "ModernTaxonomyPickerPanelCloseButtonText": "关闭"
 };
 });

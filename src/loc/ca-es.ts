@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Web Search",
   "Yes": "Sí",
   "SelectedLabel": "Seleccionat",
-  "SelectIcon": "Seleccionar icona"
+  "SelectIcon": "Seleccionar icona",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Introduïu un terme que vulgueu etiquetar",
+  "ModernTaxonomyPickerTreeTitle": "Seleccioneu una etiqueta",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Afegeix etiqueta",
+  "ModernTaxonomyPickerApplyButtonText": "Utilitza",
+  "ModernTaxonomyPickerCancelButtonText": "Cancel·la",
+  "ModernTaxonomyPickerLoadMoreText": "Més informació",
+  "ModernTaxonomyPickerRemoveButtonText": "Suprimeix",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Tanca"
 };
 });

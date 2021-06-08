@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Paieška žiniatinklyje",
   "Yes": "taip",
   "SelectedLabel": "Pasirinkta",
-  "SelectIcon": "Rinktis piktogramą"
+  "SelectIcon": "Rinktis piktogramą",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Įveskite terminą, kurį norite pažymėti",
+  "ModernTaxonomyPickerTreeTitle": "Pasirinkite žymą",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Pridėti žymą",
+  "ModernTaxonomyPickerApplyButtonText": "Naudoti",
+  "ModernTaxonomyPickerCancelButtonText": "Atšaukti",
+  "ModernTaxonomyPickerLoadMoreText": "Sužinokite daugiau",
+  "ModernTaxonomyPickerRemoveButtonText": "Ištrinti",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Uždaryti"
 };
 });

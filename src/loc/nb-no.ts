@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Søk på weben",
   "Yes": "ja",
   "SelectedLabel": "Valgt",
-  "SelectIcon": "Velg ikon"
+  "SelectIcon": "Velg ikon",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Skriv inn termen som skal merkes",
+  "ModernTaxonomyPickerTreeTitle": "Velg ett eller flere merker",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Legg til merke",
+  "ModernTaxonomyPickerApplyButtonText": "Bruk",
+  "ModernTaxonomyPickerCancelButtonText": "Avbryt",
+  "ModernTaxonomyPickerLoadMoreText": "Les inn mer",
+  "ModernTaxonomyPickerRemoveButtonText": "Fjerne",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Lukk"
 };
 });

@@ -326,6 +326,14 @@ define([], () => {
     "WebSearchLinkLabel": "Vyhľadávanie na webe",
     "Yes": "áno",
     "SelectedLabel": "Zvolené",
-    "SelectIcon": "Vybrať ikonu"
+    "SelectIcon": "Vybrať ikonu",
+    "ModernTaxonomyPickerDefaultPlaceHolder": "Zadajte výraz, ktorý chcete označiť",
+    "ModernTaxonomyPickerTreeTitle": "Vyberte značku",
+    "ModernTaxonomyPickerAddTagButtonTooltip": "Pridať značku",
+    "ModernTaxonomyPickerApplyButtonText": "Použiť",
+    "ModernTaxonomyPickerCancelButtonText": "Zrušiť",
+    "ModernTaxonomyPickerLoadMoreText": "Viac informácií",
+    "ModernTaxonomyPickerRemoveButtonText": "Odstrániť",
+    "ModernTaxonomyPickerPanelCloseButtonText": "Zavrieť"
   };
 });

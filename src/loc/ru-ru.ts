@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Поиск по Веб",
   "Yes": "Да",
   "SelectedLabel": "Выбранный",
-  "SelectIcon": "Выбрать значок"
+  "SelectIcon": "Выбрать значок",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Введите термин, который нужно пометить",
+  "ModernTaxonomyPickerTreeTitle": "Выберите тег",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Добавить тег",
+  "ModernTaxonomyPickerApplyButtonText": "Использование",
+  "ModernTaxonomyPickerCancelButtonText": "Отмена",
+  "ModernTaxonomyPickerLoadMoreText": "Подробнее",
+  "ModernTaxonomyPickerRemoveButtonText": "Удалить",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Закрыть"
 };
 });

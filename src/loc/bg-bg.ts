@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Търсене в уеб",
   "Yes": "Да",
   "SelectedLabel": "Избрани",
-  "SelectIcon": "Избор на икона"
+  "SelectIcon": "Избор на икона",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Въведете термин, който искате да маркирате",
+  "ModernTaxonomyPickerTreeTitle": "Изберете маркер",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Добавяне на маркер",
+  "ModernTaxonomyPickerApplyButtonText": "Използване",
+  "ModernTaxonomyPickerCancelButtonText": "Отказ",
+  "ModernTaxonomyPickerLoadMoreText": "Научете повече",
+  "ModernTaxonomyPickerRemoveButtonText": "Изтриване",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Затваряне"
 };
 });

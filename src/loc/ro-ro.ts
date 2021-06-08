@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Căutare pe web",
   "Yes": "da",
   "SelectedLabel": "Selectat",
-  "SelectIcon": "Selectare pictogramă"
+  "SelectIcon": "Selectare pictogramă",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Introduceți un termen pe care doriți să-l etichetați",
+  "ModernTaxonomyPickerTreeTitle": "Selectați o etichetă",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Adaugă etichetă",
+  "ModernTaxonomyPickerApplyButtonText": "Utilizați",
+  "ModernTaxonomyPickerCancelButtonText": "Anulați",
+  "ModernTaxonomyPickerLoadMoreText": "Aflați mai multe",
+  "ModernTaxonomyPickerRemoveButtonText": "Ștergeți",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Închide"
 };
 });

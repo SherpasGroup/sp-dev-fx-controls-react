@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Web arama",
   "Yes": "Evet",
   "SelectedLabel": "Seçili",
-  "SelectIcon": "Simge seç"
+  "SelectIcon": "Simge seç",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Etiketlemek istediğiniz bir terim girin",
+  "ModernTaxonomyPickerTreeTitle": "Bir etiket seçin",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Etiket Ekle",
+  "ModernTaxonomyPickerApplyButtonText": "Kullan",
+  "ModernTaxonomyPickerCancelButtonText": "İptal",
+  "ModernTaxonomyPickerLoadMoreText": "Daha fazla bilgi edinin",
+  "ModernTaxonomyPickerRemoveButtonText": "Sil",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Kapat"
 };
 });

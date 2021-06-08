@@ -326,6 +326,14 @@ define([], () => {
     "WebSearchLinkLabel": "Recherche Internet",
     "Yes": "Oui",
     "SelectedLabel": "Sélectionné",
-    "SelectIcon": "Sélectionner une icône"
+    "SelectIcon": "Sélectionner une icône",
+    "ModernTaxonomyPickerDefaultPlaceHolder": "Entrez un terme que vous souhaitez marquer",
+    "ModernTaxonomyPickerTreeTitle": "Sélectionnez une balise",
+    "ModernTaxonomyPickerAddTagButtonTooltip": "Ajouter une balise",
+    "ModernTaxonomyPickerApplyButtonText": "Utiliser",
+    "ModernTaxonomyPickerCancelButtonText": "Annuler",
+    "ModernTaxonomyPickerLoadMoreText": "En savoir plus",
+    "ModernTaxonomyPickerRemoveButtonText": "Supprimer",
+    "ModernTaxonomyPickerPanelCloseButtonText": "Fermer"
   };
 });

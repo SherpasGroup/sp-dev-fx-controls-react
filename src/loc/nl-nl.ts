@@ -328,6 +328,14 @@ define([], () => {
   "WebSearchLinkLabel": "Zoeken op het web",
   "Yes": "Ja",
   "SelectedLabel": "Geselecteerd",
-  "SelectIcon": "Selecteer pictogram"
+  "SelectIcon": "Selecteer pictogram",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Voer een term in die u wilt taggen",
+  "ModernTaxonomyPickerTreeTitle": "Selecteer een tag",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Tag toevoegen",
+  "ModernTaxonomyPickerApplyButtonText": "Gebruik",
+  "ModernTaxonomyPickerCancelButtonText": "Annuleren",
+  "ModernTaxonomyPickerLoadMoreText": "Meer informatie",
+  "ModernTaxonomyPickerRemoveButtonText": "Verwijderen",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Sluiten"
 };
 });

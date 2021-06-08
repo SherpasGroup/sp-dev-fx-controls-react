@@ -326,6 +326,14 @@ define([], () => {
   "WebSearchLinkLabel": "Αναζήτηση στο Web",
   "Yes": "Ναι",
   "SelectedLabel": "Επιλεγμένα",
-  "SelectIcon": "Επιλογή εικονιδίου"
+  "SelectIcon": "Επιλογή εικονιδίου",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Εισαγάγετε έναν όρο που θέλετε να προσθέσετε ετικέτα",
+  "ModernTaxonomyPickerTreeTitle": "Επιλογή ετικέτας",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Προσθήκη ετικέτας",
+  "ModernTaxonomyPickerApplyButtonText": "Χρήση",
+  "ModernTaxonomyPickerCancelButtonText": "Ακύρωση",
+  "ModernTaxonomyPickerLoadMoreText": "Μάθετε περισσότερα",
+  "ModernTaxonomyPickerRemoveButtonText": "Διαγραφή",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Κλείσιμο"
 };
 });
