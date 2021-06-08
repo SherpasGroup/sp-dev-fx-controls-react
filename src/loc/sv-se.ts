@@ -333,6 +333,7 @@ define([], () => {
   "ModernTaxonomyPickerApplyButtonText": "Använd",
   "ModernTaxonomyPickerCancelButtonText": "Avbryt",
   "ModernTaxonomyPickerLoadMoreText": "Läs in mer",
-  "ModernTaxonomyPickerRemoveButtonText": "Ta bort"
+  "ModernTaxonomyPickerRemoveButtonText": "Ta bort",
+  "ModernTaxonomyPickerPanelCloseButtonText": "Stäng"
 };
 });

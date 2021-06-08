@@ -362,6 +362,7 @@ declare interface IControlStrings {
   ModernTaxonomyPickerCancelButtonText: string;
   ModernTaxonomyPickerLoadMoreText: string;
   ModernTaxonomyPickerRemoveButtonText: string;
+  ModernTaxonomyPickerPanelCloseButtonText: string;
 }
 
 declare interface IDateTimeStrings {
