@@ -326,6 +326,13 @@ define([], () => {
   "WebSearchLinkLabel": "Webbsökning",
   "Yes": "Ja",
   "SelectedLabel": "Vald",
-  "SelectIcon": "Välj ikon"
+  "SelectIcon": "Välj ikon",
+  "ModernTaxonomyPickerDefaultPlaceHolder": "Ange en term som du vill tagga",
+  "ModernTaxonomyPickerTreeTitle": "Välj en tagg",
+  "ModernTaxonomyPickerAddTagButtonTooltip": "Lägg till tagg",
+  "ModernTaxonomyPickerApplyButtonText": "Använd",
+  "ModernTaxonomyPickerCancelButtonText": "Avbryt",
+  "ModernTaxonomyPickerLoadMoreText": "Läs in mer",
+  "ModernTaxonomyPickerRemoveButtonText": "Ta bort"
 };
 });

@@ -353,6 +353,15 @@ declare interface IControlStrings {
   DynamicFormTermPanelTitle: string;
   DynamicFormEnterURLPlaceholder: string;
   DynamicFormEnterDescriptionPlaceholder: string;
+
+  // Modern taxonomy picker
+  ModernTaxonomyPickerDefaultPlaceHolder: string;
+  ModernTaxonomyPickerTreeTitle: string;
+  ModernTaxonomyPickerAddTagButtonTooltip: string;
+  ModernTaxonomyPickerApplyButtonText: string;
+  ModernTaxonomyPickerCancelButtonText: string;
+  ModernTaxonomyPickerLoadMoreText: string;
+  ModernTaxonomyPickerRemoveButtonText: string;
 }
 
 declare interface IDateTimeStrings {

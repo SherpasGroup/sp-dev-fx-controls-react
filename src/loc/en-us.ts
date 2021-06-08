@@ -379,6 +379,14 @@ define([], () => {
     DynamicFormRequiredErrorMessage: "You can't leave this blank.",
     DynamicFormTermPanelTitle: "Select Term",
     DynamicFormEnterURLPlaceholder: "Enter a URL",
-    DynamicFormEnterDescriptionPlaceholder: "Alternative text"
+    DynamicFormEnterDescriptionPlaceholder: "Alternative text",
+
+    ModernTaxonomyPickerDefaultPlaceHolder: "Type term to tag",
+    ModernTaxonomyPickerTreeTitle: "Select one or more tags",
+    ModernTaxonomyPickerAddTagButtonTooltip: "Add Tag",
+    ModernTaxonomyPickerApplyButtonText: "Apply",
+    ModernTaxonomyPickerCancelButtonText: "Cancel",
+    ModernTaxonomyPickerLoadMoreText: "Load more",
+    ModernTaxonomyPickerRemoveButtonText: "Remove"
   };
 });
